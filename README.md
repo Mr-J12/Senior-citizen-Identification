@@ -30,14 +30,21 @@ The system works as a two-stage pipeline:
 
 When you run the training script (`model_training.py`) it computes and saves useful evaluation artifacts for both the age regression and gender classification tasks. The training script produces the following files inside a `reports/` directory (created automatically):
 
-- `reports/training_history.csv` — per-epoch loss and metric values (CSV table).
-- `reports/training_history.png` — plotted training & validation curves (loss, accuracy, MAE) as an image.
-- `reports/final_metrics_summary.csv` — one-line summary of final metrics (train/val loss, final gender acc, final age MAE).
-- `reports/gender_classification_report.txt` — human-readable classification report for gender (precision/recall/f1-support).
-- `reports/gender_classification_report.csv` — same as above in CSV (structured) form.
-- `reports/gender_confusion_matrix.png` — confusion matrix image for gender predictions.
-- `reports/gender_confusion_matrix.csv` — confusion matrix as CSV.
-
+### Gender Model Accuracy
+![gender_accuracy](assets/gender_model_accuracy.png)
+---
+### Gender & Age Model Loss
+![gender_age_loss](assets/gender&age_model_loss.png)
+---
+### Total Model Loss
+![model_loss](assets/model_loss.png)
+---
+###  Model Confusion Matrix
+![model_confusionmatrix](assets/model_confusionmatrix.png)
+---
+### Model Classification Report
+![model_classificationreport](assets/model_classificationreport.png)
+---
 How to generate these files
 
 1. Ensure the UTKFace dataset is extracted to the `UTKFace/` folder and dependencies are installed:
