@@ -26,6 +26,51 @@ The system works as a two-stage pipeline:
 
 *(Insert a screenshot or GIF of your project working here)*
 
+## Model metrics & reports
+
+When you run the training script (`model_training.py`) it computes and saves useful evaluation artifacts for both the age regression and gender classification tasks. The training script produces the following files inside a `reports/` directory (created automatically):
+
+- `reports/training_history.csv` — per-epoch loss and metric values (CSV table).
+- `reports/training_history.png` — plotted training & validation curves (loss, accuracy, MAE) as an image.
+- `reports/final_metrics_summary.csv` — one-line summary of final metrics (train/val loss, final gender acc, final age MAE).
+- `reports/gender_classification_report.txt` — human-readable classification report for gender (precision/recall/f1-support).
+- `reports/gender_classification_report.csv` — same as above in CSV (structured) form.
+- `reports/gender_confusion_matrix.png` — confusion matrix image for gender predictions.
+- `reports/gender_confusion_matrix.csv` — confusion matrix as CSV.
+
+How to generate these files
+
+1. Ensure the UTKFace dataset is extracted to the `UTKFace/` folder and dependencies are installed:
+
+```bash
+pip install -r requirements.txt
+```
+
+2. Run the training script (this will train the model and write the reports):
+
+```bash
+python model_training.py
+```
+
+3. After training completes you can open the `reports/` folder to view the plots and CSVs. Example quick checks in Python:
+
+```python
+import pandas as pd
+pd.read_csv('reports/training_history.csv').tail()
+
+# Print classification report
+print(open('reports/gender_classification_report.txt').read())
+```
+
+Notes on interpretation
+
+- Accuracy: check `final_gender_val_acc` in `reports/final_metrics_summary.csv` and the plotted validation accuracy curve in `training_history.png`.
+- Loss: review `val_loss` (and per-head losses) in `training_history.csv` and the PNG plot.
+- Classification report: contains precision, recall and f1-score per class (Male/Female). Use this to evaluate class-wise performance.
+- Confusion matrix: shows the count of true vs predicted classes — useful to see systematic misclassification.
+
+If you'd like, I can add example screenshots or embed the latest classification report and confusion matrix directly into this README once you've run training and share the resulting files here.
+
 ## How to Run
 
 1.  Clone the repository:
