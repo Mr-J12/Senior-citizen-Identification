@@ -18,6 +18,28 @@ The system works as a two-stage pipeline:
     * The notebook used for this training can be found here: [Link to your public Model_Training.ipynb notebook].
 3.  **Logging:** A Python script using OpenCV captures video, runs the pipeline on each frame, and logs all senior citizen data. The results are saved to `senior_citizen_log.csv` using Pandas.
 
+## Dataset
+
+This project uses the public UTKFace dataset as the labeled face corpus for training the age (regression) and gender (binary classification) heads.
+
+- Dataset contents: UTKFace contains thousands of face images covering a wide age range (commonly 0–116 years). Images vary in resolution and lighting conditions and were collected for academic research on age, gender and race estimation.
+- Filename format: labels are encoded in each filename using the format:
+
+    `[age]_[gender]_[race]_[date].jpg`
+
+    - age: integer age (e.g., 25)
+    - gender: 0 = male, 1 = female
+    - race: integer code (see the original UTKFace documentation for the exact race mapping)
+
+    Example filenames:
+
+    - `25_0_2_20170116174525125.jpg`  (25 years old, male, race code 2)
+    - `60_1_0_20161219234512345.jpg`  (60 years old, female, race code 0)
+
+- Preparation: download and extract the UTKFace images into the repository root folder named `UTKFace/` so that images are accessible at `UTKFace/<image_file>.jpg`. The training script (`model_training.py`) expects this path by default.
+- Notes: the training script filters out invalid ages and keeps images with ages in the range 1–116. Check filenames carefully — the code assumes the label parts are present and separated by underscores.
+- License & source: UTKFace is a publicly available dataset used for academic purposes. Please refer to the original UTKFace source or mirror for licensing details and cite appropriately when required.
+
 ## Results
 
 * **Age Model (MAE):** The fine-tuned model achieved a Mean Absolute Error of **[Your MAE, e.g., 3.8] years** on the validation set.
